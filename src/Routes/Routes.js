@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../Layout/Root";
-import ErrorPage from '../Pages/ErrorPage'
+import ErrorPage from '../Pages/ErrorPage/ErrorPage'
 
 
 export const router = createBrowserRouter([
@@ -9,7 +9,7 @@ export const router = createBrowserRouter([
         element : <Root></Root>,
         errorElement : <ErrorPage></ErrorPage>,
         children : [
-            
+
         ]
     }
 ]);
