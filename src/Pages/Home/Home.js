@@ -10,22 +10,15 @@ const Home = () => {
                     <div className="mb-16 lg:my-40 lg:max-w-lg lg:pr-5">
                     <div className="max-w-xl mb-6">
                         <div>
-                        <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-400">
-                            New Colaboration
-                        </p>
                         </div>
                         <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
-                        The quick, brown fox
+                        <span className="inline-block text-rose-400">Edu Lab </span> is a
                         <br className="hidden md:block" />
-                        jumps over{' '}
-                        <span className="inline-block text-purple-400">
-                            a lazy dog
-                        </span>
+                        community for
+                        creative people.
                         </h2>
                         <p className="text-base text-gray-700 md:text-lg">
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                        quae. explicabo.
+                        Learn from expert professionals and join the largest online community for creatives.
                         </p>
                     </div>
                     <div className="flex flex-col items-center md:flex-row">
