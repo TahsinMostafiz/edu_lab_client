@@ -1,10 +1,10 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { FaDownload } from 'react-icons/fa';
 
 const CourseDetails = () => {
     const course = useLoaderData();
-    const {title, rating, total_student, price, consultant, image_url, details, _id} = course;
+    const {title, price, image_url, details, Course_Curriculum} = course;
     return (
         <div>
             <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
@@ -49,101 +49,37 @@ const CourseDetails = () => {
             <div className="grid max-w-screen-lg gap-8 lg:grid-cols-2 sm:mx-auto">
                 <div className="flex flex-col justify-center">
                 <div className="flex">
-                    <div className="mr-4">
-                    <div className="flex items-center justify-center w-10 h-10 mb-3 rounded-full bg-indigo-50">
-                        <svg
-                        className="w-8 h-8 text-deep-purple-accent-400"
-                        stroke="currentColor"
-                        viewBox="0 0 52 52"
-                        >
-                        <polygon
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            fill="none"
-                            points="29 13 14 29 25 29 23 39 38 23 27 23"
-                        />
-                        </svg>
-                    </div>
-                    </div>
                     <div>
-                    <h6 className="mb-2 font-semibold leading-5">
-                        They urge you to put down
-                    </h6>
-                    <p className="text-sm text-gray-900">
-                        Skate ipsum dolor sit amet, alley oop vert mute-air Colby Carter
-                        flail 180 berm. Half-cab camel back ollie transition ledge Wes
-                        Humpston 1080.
-                    </p>
-                    <hr className="w-full my-6 border-gray-300" />
-                    </div>
-                </div>
-                <div className="flex">
-                    <div className="mr-4">
-                    <div className="flex items-center justify-center w-10 h-10 mb-3 rounded-full bg-indigo-50">
-                        <svg
-                        className="w-8 h-8 text-deep-purple-accent-400"
-                        stroke="currentColor"
-                        viewBox="0 0 52 52"
-                        >
-                        <polygon
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            fill="none"
-                            points="29 13 14 29 25 29 23 39 38 23 27 23"
-                        />
-                        </svg>
-                    </div>
-                    </div>
-                    <div>
-                    <h6 className="mb-2 font-semibold leading-5">
-                        The powerless in a world
-                    </h6>
-                    <p className="text-sm text-gray-900">
-                        The first mate and his Skipper too will do their very best to
-                        make the others comfortable in their tropic island nest. Michael
-                        Knight a young loner.
-                    </p>
-                    <hr className="w-full my-6 border-gray-300" />
-                    </div>
-                </div>
-                <div className="flex">
-                    <div className="mr-4">
-                    <div className="flex items-center justify-center w-10 h-10 mb-3 rounded-full bg-indigo-50">
-                        <svg
-                        className="w-8 h-8 text-deep-purple-accent-400"
-                        stroke="currentColor"
-                        viewBox="0 0 52 52"
-                        >
-                        <polygon
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            fill="none"
-                            points="29 13 14 29 25 29 23 39 38 23 27 23"
-                        />
-                        </svg>
-                    </div>
-                    </div>
-                    <div>
-                    <h6 className="mb-2 font-semibold leading-5">
-                        Tell them I hate them
-                    </h6>
-                    <p className="text-sm text-gray-900">
-                        Chase ball of string eat plants, meow, and throw up because I
-                        ate plants going to catch the red dot today going to catch the
-                        red dot today. I could pee on this if I had the energy.
-                    </p>
+                        <h6 className="mb-4 font-bold leading-5 text-2xl">
+                        Course Curriculum
+                        </h6>
+                        
+                        <div className="grid lg:grid-cols-2 gap-2">
+                            {
+                                Course_Curriculum.map(curr => <p className="text-sm text-gray-900 font-semibold">
+                                {curr}
+                                </p>)
+                            }
+                        </div>
+                        <hr className="w-full my-6 border-gray-300" />
                     </div>
                 </div>
                 </div>
                 <div className="grid grid-cols-2 gap-5">
                 <img
-                    className="object-cover w-full  col-span-2 rounded shadow-lg"
+                    className="object-cover w-full h-96 col-span-2 rounded shadow-lg"
                     src={image_url}
-                    alt=""
+                    alt={title}
                 />
+                </div>
+            </div>
+            <div className="p-6 py-12 bg-rose-400 rounded text-yellow-50 md:mt-5">
+                <div className="container mx-auto">
+                    <div className="flex flex-col lg:flex-row items-center justify-between">
+                        <h2 className="text-center text-4xl tracking-tighter font-bold">Course fee : ${price}
+                        </h2>
+                        <Link to="#" rel="noreferrer noopener" className="px-5 mt-4 lg:mt-0 py-3 rounded-md border block bg-gray-50 text-gray-900 border-rose-400">Get premium access</Link>
+                    </div>
                 </div>
             </div>
             </div> 
