@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { FaUser } from 'react-icons/fa';
 const CourseCard = ({course}) => {
     const {title, rating, total_student, price, consultant, image_url, details, _id} = course;
     return (
         <div>
-            <div className="rounded-md shadow-md sm:w-96 dark:bg-gray-900 dark:text-gray-100">
+            <div className="rounded-md shadow-md  dark:bg-gray-900 dark:text-gray-100">
                 <div className="flex items-center justify-between p-3">
                     <div className="flex items-center space-x-2">
                         <img src={consultant?.img} alt="" className="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-700" />
@@ -25,7 +25,7 @@ const CourseCard = ({course}) => {
                     </div>
                     <div className="flex items-center justify-between my-4">
                             <span className="inline-block font-medium text-md leading-none text-gray-700">Reviews: <span className='text-amber-500'>{rating?.number}</span></span>
-                           <span className="inline-block font-medium text-md leading-none text-gray-700">Student: <span>{total_student}</span></span>
+                           <span className="flex font-medium text-md leading-none text-gray-700"><FaUser className='mr-2 text-gray-600'></FaUser> Student : { total_student}</span>
                     </div>
                     <div className="space-y-3">
                         <p className="text-sm">

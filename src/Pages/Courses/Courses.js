@@ -13,7 +13,7 @@ const Courses = () => {
                         <Categories></Categories>
                     </div>
                     <div className=" md:col-start-4 col-span-12">
-                        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4">
                             {
                                 allCourses.map(course => <CourseCard key={course._id} course={course}></CourseCard>)
                             }
