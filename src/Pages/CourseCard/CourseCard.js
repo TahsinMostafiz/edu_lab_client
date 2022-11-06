@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaUser } from 'react-icons/fa';
+import { BsFillPersonPlusFill} from 'react-icons/bs';
 const CourseCard = ({course}) => {
     const {title, rating, total_student, price, consultant, image_url, details, _id} = course;
     return (
@@ -25,7 +25,7 @@ const CourseCard = ({course}) => {
                     </div>
                     <div className="flex items-center justify-between my-4">
                             <span className="inline-block font-medium text-md leading-none text-gray-700">Reviews: <span className='text-amber-500'>{rating?.number}</span></span>
-                           <span className="flex font-medium text-md leading-none text-gray-700"><FaUser className='mr-2 text-gray-600'></FaUser> Student : { total_student}</span>
+                           <span className="flex font-medium text-md leading-none text-gray-700"><BsFillPersonPlusFill className='mr-2 text-gray-600'></BsFillPersonPlusFill> Student : { total_student}</span>
                     </div>
                     <div className="space-y-3">
                         <p className="text-sm">

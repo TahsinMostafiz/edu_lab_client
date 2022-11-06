@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../Assets/logo192.png'
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Header = () => {
 const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+const {user} = useContext(AuthContext);
     return (
         <div>
             {/* className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8' */}
@@ -72,6 +75,16 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
                             title="Sign up"
                             >
                             Sign up
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                            to="/user"
+                            aria-label="User"
+                            title="User"
+                            className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-rose-400"
+                            >
+                            {user?.displayName}
                             </Link>
                         </li>
                 </ul>
