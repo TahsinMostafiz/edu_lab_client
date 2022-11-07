@@ -1,15 +1,20 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 
 const provider = new GoogleAuthProvider();
 
 const Register = () => {
-    const {providerLogin, createUser} = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const [checked, setChecked] = useState(false);
+    const {providerLogin, createUser, updateUserProfile, emailVerify} = useContext(AuthContext);
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleCreateUser = (event) => {
         event.preventDefault();
@@ -23,12 +28,16 @@ const Register = () => {
         createUser(email, password)
         .then((result) => {
             const user = result.user;
-            console.log(user)
             form.reset();
+            setError('');
+            navigate(from, {replace : true});
+            toast.success("Please Verify Your Email. Email verification Link has been sent");
+            handleUpdateUserProfile(name, photoURL);
+            handleEmailVerify();
           }).catch((error) => {
             // Handle Errors here.
             const errorMessage = error.message;
-            console.log(errorMessage);
+            setError(errorMessage);
           });
     }
 
@@ -38,13 +47,42 @@ const Register = () => {
         .then((result) => {
             const user = result.user;
             console.log(user)
-
-            navigate('/');
+            setError('');
+            navigate(from, {replace : true});
           }).catch((error) => {
             // Handle Errors here.
             const errorMessage = error.message;
-            console.log(errorMessage);
+            setError(errorMessage);
           });
+    }
+
+    const handleChecked = event => {
+        setChecked(event.target.checked);
+    }
+
+    const handleUpdateUserProfile = (name, photoURL) => {
+        const profile = {
+            displayName : name,
+            photoURL : photoURL
+        };
+        updateUserProfile(profile)
+        .then((result) => {
+          }).catch((error) => {
+            // Handle Errors here.
+            const errorMessage = error.message;
+            toast.error(errorMessage);
+          });
+    }
+
+    const handleEmailVerify = () => {
+        emailVerify()
+        .then((result) => {
+            toast.success("Email Verified Successfully");
+        }).catch((error) => {
+          // Handle Errors here.
+          const errorMessage = error.message;
+          toast.error(errorMessage);
+        });
     }
 
     return (
@@ -93,8 +131,19 @@ const Register = () => {
                             </div>
                             <input type="password" name="password"  placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-violet-400" required />
                         </div>
+                        <>
+                            <span className='text-red-500 font-semibold'>{error}</span>
+                        </>
+
+                        
                     </div>
-                    <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:dark:bg-violet-400 bg-rose-400 text-white dark:dark:text-gray-900">Register</button>
+                    <div className="form-control">
+                        <label onClick={handleChecked} className="label cursor-pointer">
+                            <input type="checkbox" className="mr-3" />
+                            <span className="label-text">Terms & Conditions</span> 
+                        </label>
+                    </div>
+                    <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:dark:bg-rose-400 bg-rose-400 text-white dark:dark:text-gray-900 cursor-pointer" disabled={!checked}>Register</button>
                 </form>
             </div>
         </div>

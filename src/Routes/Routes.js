@@ -9,6 +9,7 @@ import FAQ from "../Pages/FAQ/FAQ";
 import Home from '../Pages/Home/Home'
 import SignIn from "../Pages/SignIn/SignIn";
 import Register from "../Pages/SignUp/Register";
+import PrivetRoute from "./PrivetRoute/PrivetRoute";
 
 
 export const router = createBrowserRouter([
@@ -27,7 +28,7 @@ export const router = createBrowserRouter([
             },
             {
                 path : '/courses',
-                element : <Courses></Courses>,
+                element : <PrivetRoute><Courses></Courses></PrivetRoute>,
                 loader : () => fetch(`http://localhost:5000/courses`)
             },
             {
@@ -45,7 +46,7 @@ export const router = createBrowserRouter([
             },
             {
                 path : '/course/:id',
-                element : <CourseDetails></CourseDetails>,
+                element : <PrivetRoute><CourseDetails></CourseDetails></PrivetRoute>,
                 loader : ({params}) => fetch(`http://localhost:5000/course/${params.id}`)
             },
             {

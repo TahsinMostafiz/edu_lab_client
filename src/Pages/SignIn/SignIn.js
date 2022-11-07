@@ -1,13 +1,18 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 
 const provider = new GoogleAuthProvider();
 
 const SignIn = () => {
-    const {providerLogin, logIn} = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const {providerLogin, logIn, setLoading} = useContext(AuthContext);
+
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/';
 
     const navigate = useNavigate();
 
@@ -22,14 +27,21 @@ const SignIn = () => {
         logIn(email, password)
         .then((result) => {
             const user = result.user;
-            console.log(user)
             form.reset();
-
-            navigate('/');
+            setError('');
+            if(user?.emailVerified) {
+                navigate(from, {replace : true});
+            }
+            else {
+                toast.error("Please Verify your email");
+            }
           }).catch((error) => {
             // Handle Errors here.
             const errorMessage = error.message;
-            console.log(errorMessage);
+            setError(errorMessage);
+          })
+          .finally(() =>{
+            setLoading(false);
           });
     }
 
@@ -38,11 +50,12 @@ const SignIn = () => {
         providerLogin(provider)
         .then((result) => {
             const user = result.user;
+            setError('');
             console.log(user)
           }).catch((error) => {
             // Handle Errors here.
             const errorMessage = error.message;
-            console.log(errorMessage);
+            setError(errorMessage);
           });
     }
     return (
@@ -51,7 +64,7 @@ const SignIn = () => {
             <div className="w-full max-w-md p-4 rounded-md shadow sm:p-8 dark:dark:bg-gray-900 dark:dark:text-gray-100">
                 <h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
                 <p className="text-sm text-center dark:dark:text-gray-400">Don't have account? 
-                    <Link to="/register" rel="noopener noreferrer" className="focus:underline hover:underline"> Sign Up here</Link>
+                    <Link to="/register" className="focus:underline hover:underline"> Sign Up here</Link>
                 </p>
                 <div className="my-6 space-y-4">
                     <button onClick={googleLogin} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:dark:border-gray-400 focus:ring-rose-400">
@@ -85,6 +98,9 @@ const SignIn = () => {
                             </div>
                             <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-rose-400" />
                         </div>
+                        <>
+                            <span className='text-red-500 font-semibold'>{error}</span>
+                        </>
                     </div>
                     <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:dark:bg-rose-400 bg-rose-400 text-white dark:dark:text-gray-900">Sign In</button>
                 </form>
