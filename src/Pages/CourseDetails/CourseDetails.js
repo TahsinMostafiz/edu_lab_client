@@ -4,7 +4,7 @@ import { FaDownload } from 'react-icons/fa';
 
 const CourseDetails = () => {
     const course = useLoaderData();
-    const {title, price, image_url, details, Course_Curriculum} = course;
+    const {title, price, image_url, details, Course_Curriculum, _id} = course;
     return (
         <div>
             <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
@@ -78,7 +78,7 @@ const CourseDetails = () => {
                     <div className="flex flex-col lg:flex-row items-center justify-between">
                         <h2 className="text-center text-4xl tracking-tighter font-bold">Course fee : ${price}
                         </h2>
-                        <Link to="#" rel="noreferrer noopener" className="px-5 mt-4 lg:mt-0 py-3 rounded-md border block bg-gray-50 text-gray-900 border-rose-400">Get premium access</Link>
+                        <Link to={`/checkout/${_id}`} className="px-5 mt-4 lg:mt-0 py-3 rounded-md border block bg-gray-50 text-gray-900 border-rose-400">Get premium access</Link>
                     </div>
                 </div>
             </div>

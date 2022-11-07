@@ -105,8 +105,7 @@ const handleLogOut = () => {
                         </li>
                         <li>
                             {user?.photoURL ?
-                                <img className='w-8 rounded-full' src={user?.photoURL} alt="userPhoto" />
-                            
+                                <img className='w-8 rounded-full cursor-pointer' src={user?.photoURL} alt="userPhoto" title={user?.displayName}/>
                             :
                                 <FaUserAlt></FaUserAlt>
 
@@ -239,7 +238,7 @@ const handleLogOut = () => {
                                 </li>
                                 <li>
                                     {user?.photoURL ?
-                                        <img className='w-8 rounded-full' src={user?.photoURL} alt="userPhoto" />
+                                        <img className='w-8 rounded-full cursor-pointer' src={user?.photoURL} alt="userPhoto" title={user?.displayName}/>
                                     
                                     :
                                         <FaUserAlt></FaUserAlt>
