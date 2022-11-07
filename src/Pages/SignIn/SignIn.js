@@ -8,7 +8,27 @@ const provider = new GoogleAuthProvider();
 
 const SignIn = () => {
 
-    const {providerLogin} = useContext(AuthContext);
+    const {providerLogin, logIn} = useContext(AuthContext);
+
+    const handleLogIn = (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+
+        logIn(email, password)
+        .then((result) => {
+            const user = result.user;
+            console.log(user)
+            form.reset();
+          }).catch((error) => {
+            // Handle Errors here.
+            const errorMessage = error.message;
+            console.log(errorMessage);
+          });
+    }
 
 
     const googleLogin = () => {
@@ -49,7 +69,7 @@ const SignIn = () => {
                     <p className="px-3 dark:dark:text-gray-400">OR</p>
                     <hr className="w-full dark:dark:text-gray-400" />
                 </div>
-                <form className="space-y-8 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handleLogIn} className="space-y-8 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <label htmlFor="email" className="block text-sm">Email address</label>
@@ -58,7 +78,7 @@ const SignIn = () => {
                         <div className="space-y-2">
                             <div className="flex justify-between">
                                 <label htmlFor="password" className="text-sm">Password</label>
-                                <Link rel="noopener noreferrer" to="#" className="text-xs hover:underline dark:dark:text-gray-400">Forgot password?</Link>
+                                <Link to="#" className="text-xs hover:underline dark:dark:text-gray-400">Forgot password?</Link>
                             </div>
                             <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-rose-400" />
                         </div>

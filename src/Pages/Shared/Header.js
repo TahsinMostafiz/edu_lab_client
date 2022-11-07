@@ -10,7 +10,16 @@ import { FaUserAlt} from 'react-icons/fa';
 const Header = () => {
 const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-const {user} = useContext(AuthContext);
+const {user, logOut} = useContext(AuthContext);
+
+const handleLogOut = () => {
+    logOut()
+    .then(() => {
+        // Sign-out successful.
+      }).catch((error) => {
+        console.log(error)
+      });
+}
     return (
         <div>
             {/* className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8' */}
@@ -67,11 +76,11 @@ const {user} = useContext(AuthContext);
                                 user?.uid ?
                                 <div className="flex items-center space-x-8 lg:flex">
                                     <span className='font-medium tracking-wide text-gray-700'>{user?.displayName}</span>
-                                    <span className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-rose-400" >Log Out</span>
+                                    <span onClick={handleLogOut} className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-rose-400 cursor-pointer" >Log Out</span>
                                 </div>
                                 :
                                 <>
-                                    <span>
+                                    <span className='mr-3'>
                                         <Link
                                         to="/login"
                                         aria-label="Sign in"
@@ -200,12 +209,12 @@ const {user} = useContext(AuthContext);
                                         {
                                             user?.uid ?
                                             <>
-                                                <span className="block font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-rose-400 mb-3 cursor-pointer" >Log Out</span>
+                                                <span onClick={handleLogOut} className="block font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-rose-400 mb-3 cursor-pointer" >Log Out</span>
                                                 <span className='block font-medium tracking-wide text-gray-700 mb-3'>{user?.displayName}</span>
                                             </>
                                             :
                                             <>
-                                                <span className='block'>
+                                                <span className='block mb-3'>
                                                     <Link
                                                         to="/login"
                                                         aria-label="Sign in"

@@ -8,7 +8,29 @@ const provider = new GoogleAuthProvider();
 
 const Register = () => {
 
-    const {providerLogin} = useContext(AuthContext);
+    const {providerLogin, createUser} = useContext(AuthContext);
+
+
+    const handleCreateUser = (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        const name = form.user.value;
+        const photoURL = form.photoURL.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        createUser(email, password)
+        .then((result) => {
+            const user = result.user;
+            console.log(user)
+            form.reset();
+          }).catch((error) => {
+            // Handle Errors here.
+            const errorMessage = error.message;
+            console.log(errorMessage);
+          });
+    }
 
 
     const googleLogin = () => {
@@ -28,7 +50,7 @@ const Register = () => {
             <div className="w-full max-w-md p-4 rounded-md shadow sm:p-8 dark:dark:bg-gray-900 dark:dark:text-gray-100">
                 <h2 className="mb-3 text-3xl font-semibold text-center">Sign Up</h2>
                 <p className="text-sm text-center dark:dark:text-gray-400">Already have an account? 
-                    <Link to="/login" rel="noopener noreferrer" className="focus:underline hover:underline"> Sign In here</Link>
+                    <Link to="/login" className="focus:underline hover:underline"> Sign In here</Link>
                 </p>
                 <div className="my-6 space-y-4">
                     <button onClick={googleLogin} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:dark:border-gray-400 focus:ring-violet-400">
@@ -49,11 +71,15 @@ const Register = () => {
                     <p className="px-3 dark:dark:text-gray-400">OR</p>
                     <hr className="w-full dark:dark:text-gray-400" />
                 </div>
-                <form className="space-y-8 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handleCreateUser} className="space-y-8 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <label htmlFor="user" className="block text-sm">User name</label>
                             <input type="text" name="user" id="user" placeholder="John Doe" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-violet-400" data-temp-mail-org="2" />
+                        </div>
+                        <div className="space-y-2">
+                            <label htmlFor="photoURL" className="block text-sm">Photo URL</label>
+                            <input type="text" name="photoURL" id="photoURL" placeholder="Photo URL" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-violet-400" data-temp-mail-org="2" />
                         </div>
                         <div className="space-y-2">
                             <label htmlFor="email" className="block text-sm">Email address</label>
