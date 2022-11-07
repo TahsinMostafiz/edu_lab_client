@@ -1,14 +1,15 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 
 const provider = new GoogleAuthProvider();
 
 const SignIn = () => {
-
     const {providerLogin, logIn} = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     const handleLogIn = (event) => {
         event.preventDefault();
@@ -23,6 +24,8 @@ const SignIn = () => {
             const user = result.user;
             console.log(user)
             form.reset();
+
+            navigate('/');
           }).catch((error) => {
             // Handle Errors here.
             const errorMessage = error.message;
@@ -69,7 +72,7 @@ const SignIn = () => {
                     <p className="px-3 dark:dark:text-gray-400">OR</p>
                     <hr className="w-full dark:dark:text-gray-400" />
                 </div>
-                <form onSubmit={handleLogIn} className="space-y-8 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handleLogIn} className="space-y-8">
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <label htmlFor="email" className="block text-sm">Email address</label>
@@ -83,7 +86,7 @@ const SignIn = () => {
                             <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-rose-400" />
                         </div>
                     </div>
-                    <button type="button" className="w-full px-8 py-3 font-semibold rounded-md dark:dark:bg-rose-400 bg-rose-400 text-white dark:dark:text-gray-900">Sign Up</button>
+                    <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:dark:bg-rose-400 bg-rose-400 text-white dark:dark:text-gray-900">Sign In</button>
                 </form>
             </div>
         </div>

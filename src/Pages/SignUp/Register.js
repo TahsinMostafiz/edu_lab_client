@@ -1,15 +1,15 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 
 const provider = new GoogleAuthProvider();
 
 const Register = () => {
-
     const {providerLogin, createUser} = useContext(AuthContext);
 
+    const navigate = useNavigate();
 
     const handleCreateUser = (event) => {
         event.preventDefault();
@@ -38,6 +38,8 @@ const Register = () => {
         .then((result) => {
             const user = result.user;
             console.log(user)
+
+            navigate('/');
           }).catch((error) => {
             // Handle Errors here.
             const errorMessage = error.message;
@@ -71,28 +73,28 @@ const Register = () => {
                     <p className="px-3 dark:dark:text-gray-400">OR</p>
                     <hr className="w-full dark:dark:text-gray-400" />
                 </div>
-                <form onSubmit={handleCreateUser} className="space-y-8 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handleCreateUser} className="space-y-8">
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <label htmlFor="user" className="block text-sm">User name</label>
-                            <input type="text" name="user" id="user" placeholder="John Doe" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-violet-400" data-temp-mail-org="2" />
+                            <input type="text" name="user" placeholder="John Doe" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-violet-400" data-temp-mail-org="2" />
                         </div>
                         <div className="space-y-2">
                             <label htmlFor="photoURL" className="block text-sm">Photo URL</label>
-                            <input type="text" name="photoURL" id="photoURL" placeholder="Photo URL" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-violet-400" data-temp-mail-org="2" />
+                            <input type="text" name="photoURL" placeholder="Photo URL" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-violet-400" data-temp-mail-org="2" />
                         </div>
                         <div className="space-y-2">
                             <label htmlFor="email" className="block text-sm">Email address</label>
-                            <input type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-violet-400" data-temp-mail-org="2" required/>
+                            <input type="email" name="email" placeholder="leroy@jenkins.com" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-violet-400" data-temp-mail-org="2" required/>
                         </div>
                         <div className="space-y-2">
                             <div className="flex justify-between">
                                 <label htmlFor="password" className="text-sm">Password</label>
                             </div>
-                            <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-violet-400" required />
+                            <input type="password" name="password"  placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-violet-400" required />
                         </div>
                     </div>
-                    <button type="button" className="w-full px-8 py-3 font-semibold rounded-md dark:dark:bg-violet-400 bg-rose-400 text-white dark:dark:text-gray-900">Sign Up</button>
+                    <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:dark:bg-violet-400 bg-rose-400 text-white dark:dark:text-gray-900">Register</button>
                 </form>
             </div>
         </div>
