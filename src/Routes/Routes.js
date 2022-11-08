@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
             {
                 path : '/courses',
                 element : <PrivetRoute><Courses></Courses></PrivetRoute>,
-                loader : () => fetch(`http://localhost:5000/courses`)
+                loader : () => fetch(`https://edu-lab-server-seven.vercel.app/courses`)
             },
             {
                 path : '/faq',
@@ -47,17 +47,17 @@ export const router = createBrowserRouter([
             {
                 path : '/category/:id',
                 element : <Category></Category>,
-                loader : ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader : ({params}) => fetch(`https://edu-lab-server-seven.vercel.app/category/${params.id}`)
             },
             {
                 path : '/course/:id',
                 element : <PrivetRoute><CourseDetails></CourseDetails></PrivetRoute>,
-                loader : ({params}) => fetch(`http://localhost:5000/course/${params.id}`)
+                loader : ({params}) => fetch(`https://edu-lab-server-seven.vercel.app/course/${params.id}`)
             },
             {
                 path : '/checkout/:id',
                 element : <PrivetRoute><CheckOut></CheckOut></PrivetRoute>,
-                loader : ({params}) => fetch(`http://localhost:5000/checkout/${params.id}`)
+                loader : ({params}) => fetch(`https://edu-lab-server-seven.vercel.app/checkout/${params.id}`)
             },
             {
                 path : '/register',

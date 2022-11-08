@@ -5,7 +5,7 @@ const Categories = () => {
     const [allCategory, setAllCategory] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/edu_categories')
+        fetch('https://edu-lab-server-seven.vercel.app/edu_categories')
         .then(res => res.json())
         .then(data => setAllCategory(data))
     }, []);
