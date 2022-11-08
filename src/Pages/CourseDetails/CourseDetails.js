@@ -1,16 +1,30 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { FaDownload } from 'react-icons/fa';
+import jsPDF from 'jspdf';
 
 const CourseDetails = () => {
     const course = useLoaderData();
     const {title, price, image_url, details, Course_Curriculum, _id} = course;
+
+
+    const pdfDownload = () => {
+        const doc = new jsPDF('landscape', 'px', 'a4', 'false');
+
+        // doc.addImage(image_url, 'JPEG', 60, 20, 300, 350)
+        doc.text(60,20, `${title}`)
+        doc.text(60,40, `${price}$`)
+        doc.text(60,60, `${_id}`)
+
+
+        doc.save('course.pdf')
+    }
     return (
         <div>
             <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
                 <div>
-                <p className="inline-block px-3 py-2 cursor-pointer mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-400">
+                <p onClick={pdfDownload} className="inline-block px-3 py-2 cursor-pointer mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-400">
                     Download PDF <FaDownload className='inline-block'></FaDownload>
                 </p>
                 </div>
@@ -56,7 +70,7 @@ const CourseDetails = () => {
                         
                         <div className="grid lg:grid-cols-2 gap-2">
                             {
-                                Course_Curriculum.map(curr => <p className="text-sm text-gray-900 font-semibold">
+                                Course_Curriculum.map((curr, pos) => <p key={pos} className="text-sm text-gray-900 font-semibold">
                                 {curr}
                                 </p>)
                             }

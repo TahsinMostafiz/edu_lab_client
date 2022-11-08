@@ -70,6 +70,13 @@ const handleLogOut = () => {
                             Blog
                         </Link>
                         </li>
+                        <li>
+                            <label for="Toggle4" className="inline-flex items-center p-1 cursor-pointer bg-gray-300 text-gray-800">
+                                <input id="Toggle4" type="checkbox" className="hidden peer" />
+                                <span className="px-4 py-2 bg-gray-600 peer-checked:bg-gray-300 text-white">Dark</span>
+                                <span className="px-4 py-2 bg-gray-300 peer-checked:bg-gray-50">Light</span>
+                            </label>
+                        </li>
                         
                         <li>
                             {
@@ -161,7 +168,7 @@ const handleLogOut = () => {
                             </button>
                         </div>
                         </div>
-                        <na>
+                        <nav>
                             <ul className="space-y-4">
                                 <li>
                                 <Link
@@ -246,7 +253,7 @@ const handleLogOut = () => {
                                     }
                                 </li>
                             </ul>
-                        </na>
+                        </nav>
                     </div>
                     </div>
                 )}

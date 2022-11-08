@@ -1,6 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../Layout/Root";
 import Blog from "../Pages/Blog/Blog";
+import CorsBlog from "../Pages/Blog/BlogComponent/CorsBlog";
+import FirebaseBlog from "../Pages/Blog/BlogComponent/FirebaseBlog";
+import NodeJsBlog from "../Pages/Blog/BlogComponent/NodeJsBlog";
+import PrivetrouteBlog from "../Pages/Blog/BlogComponent/PrivetrouteBlog";
 import Category from "../Pages/Category/Category";
 import CheckOut from "../Pages/CheckOut/CheckOut";
 import CourseDetails from "../Pages/CourseDetails/CourseDetails";
@@ -62,6 +66,22 @@ export const router = createBrowserRouter([
             {
                 path : '/login',
                 element : <SignIn></SignIn>
+            },
+            {
+                path : '/corsBlog',
+                element : <CorsBlog></CorsBlog>
+            },
+            {
+                path : '/fireBaseBlog',
+                element : <FirebaseBlog></FirebaseBlog>
+            },
+            {
+                path : '/privetRouteBlog',
+                element : <PrivetrouteBlog></PrivetrouteBlog>
+            },
+            {
+                path : '/nodeBlog',
+                element : <NodeJsBlog></NodeJsBlog>
             }
         ]
     }

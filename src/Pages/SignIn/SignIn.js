@@ -9,7 +9,8 @@ const provider = new GoogleAuthProvider();
 
 const SignIn = () => {
     const [error, setError] = useState('');
-    const {providerLogin, logIn, setLoading} = useContext(AuthContext);
+    const [passEmail, setPassEmail] = useState('');
+    const {providerLogin, logIn, setLoading, passwordReset} = useContext(AuthContext);
 
     const location = useLocation()
     const from = location.state?.from?.pathname || '/';
@@ -45,6 +46,23 @@ const SignIn = () => {
           });
     }
 
+    const handleEmail = (event) => {
+        const email = event.target.value;
+
+        setPassEmail(email);
+    }
+
+    const handlePasswordReset = () => {
+        passwordReset(passEmail)
+        .then(() => {
+            toast.success('Password reset email sent');
+          }).catch((error) => {
+            // Handle Errors here.
+            const errorMessage = error.message;
+            toast.error(errorMessage);
+          });
+    }
+
 
     const googleLogin = () => {
         providerLogin(provider)
@@ -58,6 +76,9 @@ const SignIn = () => {
             setError(errorMessage);
           });
     }
+
+
+
     return (
         <div>
             <div className='flex items-center justify-center mt-5'>
@@ -89,12 +110,12 @@ const SignIn = () => {
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <label htmlFor="email" className="block text-sm">Email address</label>
-                            <input type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-rose-400" data-temp-mail-org="2" />
+                            <input onBlur={handleEmail} type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-rose-400" data-temp-mail-org="2" />
                         </div>
                         <div className="space-y-2">
                             <div className="flex justify-between">
                                 <label htmlFor="password" className="text-sm">Password</label>
-                                <Link to="#" className="text-xs hover:underline dark:dark:text-gray-400">Forgot password?</Link>
+                                <span onClick={handlePasswordReset} className="text-xs hover:underline dark:dark:text-gray-400 cursor-pointer">Forgot password?</span>
                             </div>
                             <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 focus:dark:dark:border-rose-400" />
                         </div>
