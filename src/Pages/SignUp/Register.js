@@ -81,7 +81,7 @@ const Register = () => {
             photoURL : photoURL
         };
         updateUserProfile(profile)
-        .then((result) => {
+        .then(() => {
           }).catch((error) => {
             // Handle Errors here.
             const errorMessage = error.message;
@@ -91,8 +91,7 @@ const Register = () => {
 
     const handleEmailVerify = () => {
         emailVerify()
-        .then((result) => {
-            toast.success("Email Verified Successfully");
+        .then(() => {
         }).catch((error) => {
           // Handle Errors here.
           const errorMessage = error.message;
